@@ -1,8 +1,10 @@
+import random
 
 
 class User:
     def __init__(self, name):
         self.name = name
+
 
 class SocialGraph:
     def __init__(self):
@@ -47,8 +49,27 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Add users
+        # Time Complexity: O(numUsers)
+        # Space Complexity: O(numUsers)
+        for i in range(numUsers):
+            self.addUser(f"User {i + 1}")
 
         # Create friendships
+        possibleFriendships = []
+        for userID in self.users:
+            for friendID in range(userID + 1, self.lastID + 1):
+                possibleFriendships.append((userID, friendID))
+
+        # Time Complexity: O(numUsers ^ 2)
+        # Space Complexity: O(1)
+        random.shuffle(possibleFriendships)
+
+        # Time Complexity: O(avgFriendships * numUsers // 2)
+        # Space Complexity: O(avgFriendships * numUsers // 2)
+        for friendship_index in range(avgFriendships * numUsers // 2):
+            # print(friendship_index)
+            friendship = possibleFriendships[friendship_index]
+            self.addFriendship(friendship[0], friendship[1])
 
     def getAllSocialPaths(self, userID):
         """
@@ -68,5 +89,5 @@ if __name__ == '__main__':
     sg = SocialGraph()
     sg.populateGraph(10, 2)
     print(sg.friendships)
-    connections = sg.getAllSocialPaths(1)
-    print(connections)
+    # connections = sg.getAllSocialPaths(1)
+    # print(connections)
