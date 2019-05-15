@@ -136,8 +136,11 @@ class SocialGraph:
         #     # print(friend)
         #     # if friend not in visited:
         #     # 
-
-            # Create an empty Queue
+        # {1: {8, 10, 5}, 2: {10, 5, 7}, 3: {4}, 4: {9, 3}, 5: {8, 1, 2}, 6: {10}, 7: {2}, 8: {1, 5}, 9: {4}, 10: {1, 2, 6}}
+        
+        # {1: [1], 8: [1, 8], 10: [1, 10], 5: [1, 5], 2: [1, 10, 2], 6: [1, 10, 6], 7: [1, 10, 2, 7]}
+           
+        # Create an empty Queue
         q = Queue()
         # Create an empty Visited set
         visited = {}
@@ -148,6 +151,7 @@ class SocialGraph:
             # print(q.queue)
             # Dequeue the first PATH
             path = q.dequeue()
+            print(path)
             # Grab the last vertex of the path
             v = path[-1]
             # Check if it's our destination
@@ -161,7 +165,7 @@ class SocialGraph:
                     if friend not in visited:
                         path_copy = path.copy()
                         path_copy.append(friend)
-                        q.enqueue(path)  
+                        q.enqueue(path_copy)  
 
                     # for other_f in self.friendships[friend]:
                     #     # print(friend, other_f)
